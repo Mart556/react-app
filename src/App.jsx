@@ -1,34 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import ExpensesItem from './components/ExpensesItem'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const getRandomDate = () => {
+    const start = new Date(2020, 0, 1);
+    const end = new Date();
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  };
+
+  const Expenses = [
+    { id: 1, title: 'Ese #1', date: getRandomDate(), price: 100 },
+    { id: 2, title: 'Ese #2', date: getRandomDate(), price: 200 }
+  ]
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Tere maailm!</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='expenses'>
+      {Expenses.map(expense => (
+        <ExpensesItem 
+          key={expense.id} 
+          title={expense.title} 
+          date={expense.date} 
+          price={expense.price} 
+        />
+      ))}
+    </div>
   )
 }
 
