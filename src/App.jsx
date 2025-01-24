@@ -1,6 +1,7 @@
 import './App.css'
 import ExpensesItem from './components/ExpensesItem'
 import './components/Expenses.css'
+import Card from './components/Card.jsx'
 
 function App() {
   const getRandomDate = () => {
@@ -15,7 +16,7 @@ function App() {
   ]
 
   return (
-    <div className="expenses">
+    <Card className="expenses">
       {Expenses.map(expense => (
         <ExpensesItem 
           key={expense.id} 
@@ -24,7 +25,7 @@ function App() {
           price={expense.price} 
         />
       ))}
-    </div>
+    </Card>
   )
 }
 
