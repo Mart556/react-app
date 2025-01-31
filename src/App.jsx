@@ -1,7 +1,7 @@
 import './App.css'
-import ExpensesItem from './components/Expenses/ExpensesItem.jsx'
-import './components/Expenses.css'
-import Card from './components/UI/Card.jsx'
+
+import Expenses from './components/Expenses/Expenses.jsx';
+import NewExpense from './components/NewExpenses/NewExpense.jsx'
 
 function App() {
   const getRandomDate = () => {
@@ -10,22 +10,21 @@ function App() {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   };
 
-  const Expenses = [
+  const Items = [
     { id: 1, title: 'Ese #1', date: getRandomDate(), price: 100 },
     { id: 2, title: 'Ese #2', date: getRandomDate(), price: 200 }
   ]
 
+  const addExpenseHandler = (expense) => {
+    console.log('In App.js');
+    console.log(expense);
+  }
+
   return (
-    <Card className="expenses">
-      {Expenses.map(expense => (
-        <ExpensesItem 
-          key={expense.id} 
-          title={expense.title} 
-          date={expense.date} 
-          price={expense.price} 
-        />
-      ))}
-    </Card>
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses expenses={Items} />
+    </div>
   )
 }
 
