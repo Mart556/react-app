@@ -1,9 +1,10 @@
+import { use } from 'react';
 import './App.css'
 
 import Expenses from './components/Expenses/Expenses.jsx';
 import NewExpense from './components/NewExpenses/NewExpense.jsx'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
   const getRandomDate = () => {
@@ -12,12 +13,20 @@ function App() {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   };
 
+
   const DUMMY_EXPENSES = [
-    { id: 1, title: 'Ese #1', date: getRandomDate(), price: 100 },
-    { id: 2, title: 'Ese #2', date: getRandomDate(), price: 200 }
+
   ]
 
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES)
+  const [expenses, setExpenses] = useState(() => {
+    const localData = localStorage.getItem('expenses')
+    return localData ? JSON.parse(localData) : DUMMY_EXPENSES
+  })
+
+  useEffect(() => {
+    localStorage.setItem('expenses', JSON.stringify(expenses))
+  }, [expenses])
+
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
