@@ -1,7 +1,7 @@
 import './App.css'
-import ExpensesItem from './components/ExpensesItem'
+import ExpensesItem from './components/Expenses/ExpensesItem.jsx'
 import './components/Expenses.css'
-import Card from './components/Card.jsx'
+import Card from './components/UI/Card.jsx'
 
 function App() {
   const getRandomDate = () => {
